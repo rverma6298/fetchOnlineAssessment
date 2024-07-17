@@ -31,23 +31,18 @@ public class ReceiptService {
 
     private int calculatePoints(ReceiptInfo receiptInfo) {
         int points = 0;
-        System.out.println(points);
+
         points+=receiptInfo.getRetailer().replaceAll("[^a-zA-Z0-9]", "").length();
-        System.out.println("retailer name length " + points);  //6
 
         if(receiptInfo.getTotal().endsWith(".00")) {
             points += 50;
-            System.out.println("total ends with .00 :  " + points);
         }
-        // 6
+
         if(Double.parseDouble(receiptInfo.getTotal()) % 0.25 == 0){
             points += 25;
-            System.out.println("total % 0.25 is 0 : " + points);
         }
-        //6
+
         points += (receiptInfo.getItems().size() /2 ) * 5;
-        // 6 + 10
-        System.out.println("item pairs " + points);
 
         for(Item item: receiptInfo.getItems()) {
             String description = item.getDescription().trim();
@@ -57,12 +52,9 @@ public class ReceiptService {
             }
         }
 
-        System.out.println("description length is divisible by 3 " + points);
-
         String day = receiptInfo.getPurchaseDate().split("-")[2];
         if(Integer.parseInt(day) % 2 != 0) {
             points += 6;
-            System.out.println("day receipt " + points);
         }
 
 
@@ -71,7 +63,6 @@ public class ReceiptService {
         int minute = Integer.parseInt(timeParts[1]);
         if(hour == 14 || (hour == 15 && minute == 0)) {
             points += 10;
-            System.out.println("hours receipt " + points);
         }
 
         return points;
