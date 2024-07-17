@@ -62,6 +62,6 @@ public class ReceiptsController {
 
     @GetMapping("/projectName")
     public String getProjectName() {
-        return "HITTING THE ENDPOINT";
+        return "WELCOME TO RECEIPT PROCESSOR";
     }
 }
